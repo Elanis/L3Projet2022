@@ -1,7 +1,7 @@
 ﻿using L3Projet.Business.Implementations;
 using L3Projet.Business.Interfaces;
-using L3Projet.DataAccess.Implementations;
-using L3Projet.DataAccess.Interfaces;
+using L3Projet.Common;
+using L3Projet.DataAccess;
 using L3Projet.WebAPI.HealthCheck;
 
 namespace L3Projet.WebAPI {
@@ -16,9 +16,13 @@ namespace L3Projet.WebAPI {
 
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services) {
+			var appSettingsSection = Configuration.GetSection("AppSettings");
+			services.Configure<AppSettings>(appSettingsSection);
+
 			// Add services to the container.
-			services.AddSingleton<IUsersDataAccess, UserDataAccess>();
 			services.AddTransient<IUsersService, UsersService>();
+
+			services.AddScoped<GameContext>();
 
 			services.AddControllers();
 			// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
