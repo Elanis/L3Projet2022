@@ -16,7 +16,7 @@ namespace L3Projet.WebAPI.Controllers {
 		}
 
 		[AllowAnonymous]
-		[HttpGet("/auth")]
+		[HttpPost("/auth")]
 		public ActionResult<string> AuthenticateUser(UserAuthenticationRequest authenticationRequest) {
 			var token = usersService.AuthenticateUser(authenticationRequest.Username, authenticationRequest.Password);
 
@@ -28,7 +28,7 @@ namespace L3Projet.WebAPI.Controllers {
 		}
 
 		[AllowAnonymous]
-		[HttpGet("/register")]
+		[HttpPost("/register")]
 		public ActionResult<string> RegisterUser(UserRegistrationRequest registrationRequest) {
 			var token = usersService.Register(registrationRequest);
 
