@@ -1,7 +1,9 @@
-﻿using L3Projet.Common.Models;
+﻿using L3Projet.Common.DTOModels;
 
 namespace L3Projet.Business.Interfaces {
 	public interface IUsersService {
-		IEnumerable<User> GetAllUsers();
+		string? AuthenticateUser(string username, string password);
+		string? Register(UserRegistrationRequest request);
+		UserPublicDataResponse? GetByUsername(string? name);
 	}
 }

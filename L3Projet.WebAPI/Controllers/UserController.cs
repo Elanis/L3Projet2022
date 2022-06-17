@@ -1,8 +1,11 @@
 ﻿using L3Projet.Business.Interfaces;
-using L3Projet.Common.Models;
+using L3Projet.Common;
+using L3Projet.Common.DTOModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace L3Projet.WebAPI.Controllers {
+	[Authorize(Policy = AuthPolicies.JWT_POLICY)]
 	[ApiController]
 	[Route("[controller]")]
 	public class UserController : ControllerBase {
@@ -12,15 +15,39 @@ namespace L3Projet.WebAPI.Controllers {
 			this.usersService = usersService;
 		}
 
-		[HttpGet("/all")]
-		public ActionResult<IEnumerable<User>> GetAll() {
-			var users = usersService.GetAllUsers();
+		[AllowAnonymous]
+		[HttpGet("/auth")]
+		public ActionResult<string> AuthenticateUser(UserAuthenticationRequest authenticationRequest) {
+			var token = usersService.AuthenticateUser(authenticationRequest.Username, authenticationRequest.Password);
 
-			if (users.Any()) {
-				return Ok(users);
+			if (token == null) {
+				return Unauthorized();
 			}
 
-			return NoContent();
+			return Ok(token);
+		}
+
+		[AllowAnonymous]
+		[HttpGet("/register")]
+		public ActionResult<string> RegisterUser(UserRegistrationRequest registrationRequest) {
+			var token = usersService.Register(registrationRequest);
+
+			if (token == null) {
+				return UnprocessableEntity();
+			}
+
+			return Ok(token);
+		}
+
+		[HttpGet("/current")]
+		public ActionResult<UserPublicDataResponse> GetCurrentUser() {
+			var user = usersService.GetByUsername(HttpContext?.User?.Identity?.Name);
+
+			if (user == default) {
+				return NoContent();
+			}
+
+			return Ok(user);
 		}
 	}
 }

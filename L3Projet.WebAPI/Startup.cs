@@ -3,6 +3,9 @@ using L3Projet.Business.Interfaces;
 using L3Projet.Common;
 using L3Projet.DataAccess;
 using L3Projet.WebAPI.HealthCheck;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace L3Projet.WebAPI {
 	public class Startup {
@@ -29,6 +32,19 @@ namespace L3Projet.WebAPI {
 			services.AddEndpointsApiExplorer();
 			services.AddSwaggerGen();
 
+			services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+			.AddJwtBearer(options => {
+				options.TokenValidationParameters = new TokenValidationParameters {
+					ValidateIssuer = true,
+					ValidateAudience = true,
+					ValidateLifetime = true,
+					ValidateIssuerSigningKey = true,
+					ValidIssuer = Configuration["AppSettings:JwtIssuer"],
+					ValidAudience = Configuration["AppSettings:JwtIssuer"],
+					IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["AppSettings:JwtKey"]))
+				};
+			});
+
 			services.AddCors(options => {
 				options.AddPolicy(name: CORS_POLICY,
 								  policy => {
@@ -36,6 +52,13 @@ namespace L3Projet.WebAPI {
 											.AllowAnyMethod()
 											.AllowAnyHeader();
 								  });
+			});
+
+			services.AddAuthorization(options => {
+				options.AddPolicy(
+					AuthPolicies.JWT_POLICY,
+					policy => policy.RequireAuthenticatedUser()
+				);
 			});
 
 			services.AddHealthChecks()
@@ -51,9 +74,10 @@ namespace L3Projet.WebAPI {
 
 			app.UseHttpsRedirection();
 
-			app.UseAuthorization();
-
 			app.UseRouting();
+
+			app.UseAuthentication();
+			app.UseAuthorization();
 
 			app.UseCors(CORS_POLICY);
 
