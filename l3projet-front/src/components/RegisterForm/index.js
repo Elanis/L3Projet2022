@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
+import useToken from '../../contexts/token';
 
 import register from '../../queries/register';
 
@@ -9,6 +10,7 @@ export default function RegisterForm({ switchForm }) {
 	const [password, setPassword] = useState('');
 	const [passwordConfirmation, setPasswordConfirmation] = useState('');
 	const [mail, setMail] = useState('');
+	const { setToken } = useToken();
 
 	const navigate = useNavigate();
 	const { enqueueSnackbar } = useSnackbar();
@@ -19,7 +21,7 @@ export default function RegisterForm({ switchForm }) {
 			password,
 			passwordConfirmation,
 			mail
-		});
+		}, setToken);
 		if(err !== null) {
 			enqueueSnackbar(err || 'Unknown error', { variant: 'error' });
 			return;

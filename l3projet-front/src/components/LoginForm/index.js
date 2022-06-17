@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useSnackbar } from 'notistack';
+import useToken from '../../contexts/token';
 
 import login from '../../queries/login';
 
@@ -9,9 +10,10 @@ export default function LoginForm({ switchForm }) {
 	const [password, setPassword] = useState('');
 	const navigate = useNavigate();
 	const { enqueueSnackbar } = useSnackbar();
+	const { setToken } = useToken();
 
 	const onSubmit = async() => {
-		const err = await login(username, password);
+		const err = await login(username, password, setToken);
 		if(err !== null) {
 			enqueueSnackbar(err || 'Unknown error', { variant: 'error' });
 			return;

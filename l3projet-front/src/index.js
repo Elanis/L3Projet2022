@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
 
+import { TokenProvider } from './contexts/token';
+
 import App from './components/App';
 
 import reportWebVitals from './reportWebVitals';
@@ -12,11 +14,13 @@ import './index.css';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
-		<SnackbarProvider maxSnack={3}>
-			<BrowserRouter>
-				<App />
-			</BrowserRouter>
-		</SnackbarProvider>
+		<TokenProvider>
+			<SnackbarProvider maxSnack={3}>
+				<BrowserRouter>
+					<App />
+				</BrowserRouter>
+			</SnackbarProvider>
+		</TokenProvider>
 	</React.StrictMode>
 );
 

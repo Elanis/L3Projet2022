@@ -1,6 +1,6 @@
 import { SERVER_URL } from '../config';
 
-export default async function login(user, password) {
+export default async function login(user, password, setToken) {
 	if(user.trim() === '' || password.trim() === '') {
 		return 'Error: Empty username and/or password';
 	}
@@ -19,5 +19,8 @@ export default async function login(user, password) {
 
 		return res.statusText;
 	}
+
+	setToken(await res.text());
+
 	return null;
 }

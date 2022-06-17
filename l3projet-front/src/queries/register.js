@@ -5,7 +5,7 @@ export default async function register({
 		password,
 		passwordConfirmation,
 		mail
-	}) {
+	}, setToken) {
 
 	username = username.trim();
 	password = password.trim();
@@ -54,5 +54,8 @@ export default async function register({
 
 		return res.statusText;
 	}
+
+	setToken(await res.text());
+
 	return null;
 }
