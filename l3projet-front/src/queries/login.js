@@ -1,6 +1,10 @@
 import { SERVER_URL } from '../config';
 
 export default async function login(user, password) {
+	if(user.trim() === '' || password.trim() === '') {
+		return 'Error: Empty username and/or password';
+	}
+
 	const options = {
 		method: 'POST',
 		headers: {'Content-Type': 'application/json'},

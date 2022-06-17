@@ -11,10 +11,6 @@ export default function LoginForm({ switchForm }) {
 	const { enqueueSnackbar } = useSnackbar();
 
 	const onSubmit = async() => {
-		if(username.trim() === '' || password.trim() === '') {
-			return;
-		}
-
 		const err = await login(username, password);
 		if(err !== null) {
 			enqueueSnackbar(err || 'Unknown error', { variant: 'error' });
