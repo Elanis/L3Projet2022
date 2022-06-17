@@ -1,0 +1,27 @@
+html, body {
+	padding: 0;
+	margin: 0;
+}
+
+body, input {
+	font-family: 'Kdam Thmor Pro', sans-serif;
+}
+
+body {
+	background-color: #1f2124;
+	background-image: linear-gradient(147deg, #1f2124 0%, #04233a 74%);
+	min-height: 100vh;
+	color: #EEEEEE;
+}
+
+input {
+	background-color: #d7dbed;
+}
+input[type="button"]:hover {
+	background-color: #FFF;
+	cursor: pointer;
+}
+
+* {
+	box-sizing: border-box;
+}
