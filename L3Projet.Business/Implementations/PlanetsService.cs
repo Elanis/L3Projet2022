@@ -11,13 +11,30 @@ namespace L3Projet.Business.Implementations {
             this.context = context;
         }
 
+        private void UpdateResources(Planet p) {
+            var now = DateTime.UtcNow;
+            var diff = now - p.LastCalculation;
+
+            p.Resources.ElementAt((int)ResourceType.Wood).Quantity += p.Buildings.ElementAt((int)BuildingType.SawMill).Level * diff.TotalSeconds;
+            p.Resources.ElementAt((int)ResourceType.Metal).Quantity += p.Buildings.ElementAt((int)BuildingType.Metallurgy).Level * diff.TotalSeconds;
+            p.Resources.ElementAt((int)ResourceType.Stone).Quantity += p.Buildings.ElementAt((int)BuildingType.Quarry).Level * diff.TotalSeconds;
+
+            p.LastCalculation = now;
+        }
+
         public IEnumerable<Planet>? GetMyPlanets(string username) {
-            return context.Users
+            var planets = context.Users
                 .Include(x => x.Planets)
                 .ThenInclude(x => x.Buildings)
                 .Include(x => x.Planets)
                 .ThenInclude(x => x.Resources)
                 .FirstOrDefault((user) => user.Username == username)?.Planets;
+
+            planets.ForEach(UpdateResources);
+
+            context.SaveChanges();
+
+            return planets;
         }
     }
 }
