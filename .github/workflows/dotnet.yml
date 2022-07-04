@@ -37,5 +37,5 @@ jobs:
     - name: NPM Test
       run: cd l3projet-front && npm test
     - name: NPM Build
-      run: cd l3projet-front && npm build
+      run: cd l3projet-front && npm run build
 
