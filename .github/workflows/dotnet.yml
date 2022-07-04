@@ -23,9 +23,19 @@ jobs:
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish
-      run: dotnet publish TestGithub.csproj -c Release -o API
+      run: dotnet publish -c Release -o API
     - name: Upload a Build Artifact
       uses: actions/upload-artifact@v3.0.0
       with:
         name: "API"
         path: API/*
+        
+    - name: Setup Node.js environment
+      uses: actions/setup-node@v3.3.0
+    - name: NPM Install
+      run: cd l3projet-front && npm ci
+    - name: NPM Test
+      run: cd l3projet-front && npm test
+    - name: NPM Build
+      run: cd l3projet-front && npm build
+
