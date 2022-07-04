@@ -15,6 +15,8 @@ namespace L3Projet.Business.Implementations {
             return context.Users
                 .Include(x => x.Planets)
                 .ThenInclude(x => x.Buildings)
+                .Include(x => x.Planets)
+                .ThenInclude(x => x.Resources)
                 .FirstOrDefault((user) => user.Username == username)?.Planets;
         }
     }

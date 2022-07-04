@@ -20,6 +20,8 @@ namespace L3Projet.DataAccess {
 
             modelBuilder.Entity<Building>()
                 .HasKey(o => new { o.Type, o.PlanetId });
+            modelBuilder.Entity<Resource>()
+                .HasKey(o => new { o.Type, o.PlanetId });
         }
     }
 }
