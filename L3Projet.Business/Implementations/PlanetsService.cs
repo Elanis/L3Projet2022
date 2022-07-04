@@ -36,5 +36,36 @@ namespace L3Projet.Business.Implementations {
 
             return planets;
         }
+
+        public void Upgrade(string username, Guid id, BuildingType type) {
+            var planet = context.Users
+                .Include(x => x.Planets)
+                .ThenInclude(x => x.Buildings)
+                .Include(x => x.Planets)
+                .ThenInclude(x => x.Resources)
+                .FirstOrDefault((user) => user.Username == username)
+                ?.Planets
+                .FirstOrDefault((p) => p.Id == id);
+
+            if (planet == null) {
+                throw new ArgumentException("Invalid planet");
+            }
+
+            UpdateResources(planet);
+
+            // Todo: check enough resources
+            // Todo: time
+            // Todo: custom resources amount per building
+
+            // Remove resources
+            var prevLevel = planet.Buildings.ElementAt((int)type).Level;
+            planet.Resources.ElementAt((int)ResourceType.Wood).Quantity -= prevLevel * 100;
+            planet.Resources.ElementAt((int)ResourceType.Metal).Quantity -= prevLevel * 100;
+            planet.Resources.ElementAt((int)ResourceType.Stone).Quantity -= prevLevel * 100;
+
+            planet.Buildings.ElementAt((int)type).Level += 1;
+
+            context.SaveChanges();
+        }
     }
 }

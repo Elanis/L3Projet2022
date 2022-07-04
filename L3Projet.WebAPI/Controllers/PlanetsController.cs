@@ -1,5 +1,6 @@
 ﻿using L3Projet.Business.Interfaces;
 using L3Projet.Common;
+using L3Projet.Common.DTOModels;
 using L3Projet.Common.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +25,13 @@ namespace L3Projet.WebAPI.Controllers {
             }
 
             return Ok(planets);
+        }
+
+        [HttpPost("upgrade")]
+        public ActionResult Upgrade(BuildingUpgradeRequest request) {
+            planetsService.Upgrade(HttpContext.User.Identity.Name, request.Id, (BuildingType)request.Type);
+
+            return Ok();
         }
     }
 }
