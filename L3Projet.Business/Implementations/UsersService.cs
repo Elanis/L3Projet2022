@@ -95,8 +95,10 @@ namespace L3Projet.Business.Implementations {
                 Username = request.Username,
                 Password = BCrypt.Net.BCrypt.HashPassword(request.Password),
                 Mail = request.Mail,
+                Planets = new List<Planet> {
+                    Planet.CreateEmptyPlanet(request.Username)
+                }
             });
-            context.Add(Planet.CreateEmptyPlanet(request.Username));
             context.SaveChanges();
 
             return GenerateJwtToken(request.Username);
