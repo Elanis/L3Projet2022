@@ -15,6 +15,9 @@ namespace L3Projet.Business.Implementations {
             var now = DateTime.UtcNow;
             var diff = now - p.LastCalculation;
 
+            // Todo: custom prod per type
+            // Todo: warehouse storage
+
             p.Resources.ElementAt((int)ResourceType.Wood).Quantity += p.Buildings.ElementAt((int)BuildingType.SawMill).Level * diff.TotalSeconds;
             p.Resources.ElementAt((int)ResourceType.Metal).Quantity += p.Buildings.ElementAt((int)BuildingType.Metallurgy).Level * diff.TotalSeconds;
             p.Resources.ElementAt((int)ResourceType.Stone).Quantity += p.Buildings.ElementAt((int)BuildingType.Quarry).Level * diff.TotalSeconds;
@@ -29,6 +32,10 @@ namespace L3Projet.Business.Implementations {
                 .Include(x => x.Planets)
                 .ThenInclude(x => x.Resources)
                 .FirstOrDefault((user) => user.Username == username)?.Planets;
+
+            if (planets == null) {
+                return null;
+            }
 
             planets.ForEach(UpdateResources);
 
