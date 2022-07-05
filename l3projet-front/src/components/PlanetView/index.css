@@ -1,0 +1,8 @@
+.planet-panel {
+	width: calc(50% - 2rem);
+	max-width: 300px;
+	padding: 1rem;
+	margin: 1rem;
+	display: inline-block;
+	vertical-align: top;
+}

@@ -3,6 +3,8 @@ import { useSnackbar } from 'notistack';
 import usePlanetList from '../../hooks/usePlanetList';
 import useRedirectIfNotAuthenticated from '../../hooks/useRedirectIfNotAuthenticated';
 
+import PlanetView from '../PlanetView';
+
 export default function Game() {
 	useRedirectIfNotAuthenticated();
 
@@ -11,5 +13,14 @@ export default function Game() {
 
 	console.log(planets);
 
-	return <div>Game !</div>
+	// TODO: change planet
+
+	if(planets.length === 0) {
+		// TODO: Loading
+		return null;
+	}
+
+	return (
+		<PlanetView planet={planets[0]} />
+	);
 }
