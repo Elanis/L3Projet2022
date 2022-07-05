@@ -1,6 +1,6 @@
 import fetchWithAuth from '../helpers/fetchWithAuth';
 
-export default async function upgradeBuilding(token, enqueueSnackbar, planetId, buildingId) {
+export default async function upgradeBuilding(token, enqueueSnackbar, requestPlanetListUpdate, planetId, buildingId) {
 	const res = await fetchWithAuth('/planets/upgrade', token, {
 		method: 'post',
 		headers: {'Content-Type': 'application/json'},
@@ -12,4 +12,5 @@ export default async function upgradeBuilding(token, enqueueSnackbar, planetId, 
 	if(res.status !== 200) {
 		enqueueSnackbar('Error while upgrading building.', { variant: 'error' });
 	}
+	requestPlanetListUpdate();
 }

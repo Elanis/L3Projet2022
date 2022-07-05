@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { SnackbarProvider } from 'notistack';
 
+import { PlanetListProvider } from './contexts/planetList';
 import { TokenProvider } from './contexts/token';
 
 import App from './components/App';
@@ -16,9 +17,11 @@ root.render(
 	<React.StrictMode>
 		<TokenProvider>
 			<SnackbarProvider maxSnack={3}>
-				<BrowserRouter>
-					<App />
-				</BrowserRouter>
+				<PlanetListProvider>
+					<BrowserRouter>
+						<App />
+					</BrowserRouter>
+				</PlanetListProvider>
 			</SnackbarProvider>
 		</TokenProvider>
 	</React.StrictMode>

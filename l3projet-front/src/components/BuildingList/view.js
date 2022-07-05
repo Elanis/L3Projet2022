@@ -1,6 +1,6 @@
 import './index.css';
 
-export default function BuildingList({ buildings, enqueueSnackbar, planetId, token, upgradeBuilding,  }) {
+export default function BuildingList({ buildings, enqueueSnackbar, planetId, requestPlanetListUpdate, token, upgradeBuilding,  }) {
 	const buildingsDOM = [];
 
 	// TODO: upgrade button onClick
@@ -14,7 +14,7 @@ export default function BuildingList({ buildings, enqueueSnackbar, planetId, tok
 					className="building-upgrade"
 					type="button"
 					value="Upgrade"
-					onClick={() => upgradeBuilding(token, enqueueSnackbar, planetId, Object.keys(buildings).indexOf(name))}
+					onClick={() => upgradeBuilding(token, enqueueSnackbar, requestPlanetListUpdate, planetId, Object.keys(buildings).indexOf(name))}
 				/>
 			</div>
 		)
