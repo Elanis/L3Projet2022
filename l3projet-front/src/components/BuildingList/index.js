@@ -1,23 +1,20 @@
-import './index.css';
+import { useSnackbar } from 'notistack';
 
-export default function BuildingList({ buildings }) {
-	const buildingsDOM = [];
+import upgradeBuilding from '../../queries/upgradeBuilding';
+import useToken from '../../contexts/token';
 
-	// TODO: upgrade button onClick
-	// TODO: upgrade costs
-	for(const name in buildings) {
-		buildingsDOM.push(
-			<div class="planet-building-panel">
-				<span className="building-name">{name}</span>
-				<span className="building-lvl">{buildings[name]}</span>
-				<input className="building-upgrade" type="button" value="Upgrade" />
-			</div>
-		)
-	}
+import BuildingListView from './view.js';
+
+export default function BuildingList(props) {
+	const { enqueueSnackbar } = useSnackbar();
+	const { token } = useToken();
 
 	return (
-		<fieldset className='planet-panel'>
-			<legend>Buildings</legend>
-			{buildingsDOM}
-		</fieldset>);
+		<BuildingListView
+			{...props}
+			upgradeBuilding={upgradeBuilding}
+			enqueueSnackbar={enqueueSnackbar}
+			token={token}
+		/>
+	);
 }

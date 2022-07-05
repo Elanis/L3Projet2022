@@ -9,7 +9,7 @@ export default function PlanetView({ planet }) {
 			<span>{planet.name}</span>
 			<div>
 				<ResourceList resources={planet.resourcesQuantities} />
-				<BuildingList buildings={planet.buildingsLevels} />
+				<BuildingList buildings={planet.buildingsLevels} planetId={planet.id} />
 			</div>
 		</div>
 	)
