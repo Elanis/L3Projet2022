@@ -1,8 +1,9 @@
 import useToken from '../../contexts/token';
+import useRedirectIfNotAuthenticated from '../../hooks/useRedirectIfNotAuthenticated';
 
 export default function Game() {
-	const { token } = useToken();
-	console.log(token);
+	useRedirectIfNotAuthenticated();
+	
 
 	return <div>Game !</div>
 }
