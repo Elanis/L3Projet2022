@@ -6,6 +6,8 @@ import useRedirectIfNotAuthenticated from '../../hooks/useRedirectIfNotAuthentic
 import Leaderboard from '../Leaderboard';
 import PlanetView from '../PlanetView';
 
+import './index.css';
+
 export default function Game() {
 	useRedirectIfNotAuthenticated();
 
@@ -15,7 +17,7 @@ export default function Game() {
 
 	if(planetList.length === 0) {
 		// TODO: Loading
-		return null;
+		return <img className="loading-gif" src="img/loading.png" alt="loading" />;
 	}
 
 	return (

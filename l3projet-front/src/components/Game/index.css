@@ -1,0 +1,4 @@
+.loading-gif {
+	margin-left: calc(50vw - 32px);
+	margin-top: calc(50vh - 32px);
+}
