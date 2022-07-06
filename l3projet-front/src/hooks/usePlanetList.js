@@ -10,8 +10,6 @@ export default function usePlanetList(shouldUpdate) {
 	const [planetsList, setPlanetsList] = useState([]);
 	const { enqueueSnackbar } = useSnackbar(); 
 
-	console.log(shouldUpdate);
-
 	useEffect(() => {
 		async function getPlanetsList() {
 			const res = await fetchWithAuth('/planets/mine', token);

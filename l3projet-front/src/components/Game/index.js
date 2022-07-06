@@ -10,8 +10,6 @@ export default function Game() {
 
 	const { planetList } = usePlanetList();
 
-	console.log(planetList);
-
 	// TODO: change planet
 
 	if(planetList.length === 0) {

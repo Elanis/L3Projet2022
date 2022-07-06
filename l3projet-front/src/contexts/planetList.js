@@ -8,9 +8,6 @@ export const PlanetListProvider = ({ children }) => {
 	const [shouldUpdate, setShouldUpdate] = useState(0);
 	const planetList = usePlanetList(shouldUpdate);
 
-	console.log(shouldUpdate);
-	console.log(planetList);
-
 	return (
 		<PlanetListContext.Provider value={{ planetList, requestPlanetListUpdate: () => setShouldUpdate(Date.now()) }}>
 			{children}
