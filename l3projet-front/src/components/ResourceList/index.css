@@ -2,3 +2,7 @@
 	display: inline-block;
 	width: 50%;
 }
+
+.resources-max {
+	color: red;
+}

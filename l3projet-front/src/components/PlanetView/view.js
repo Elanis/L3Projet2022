@@ -8,7 +8,10 @@ export default function PlanetView({ planet }) {
 		<div>
 			<span>{planet.name}</span>
 			<div>
-				<ResourceList resources={planet.resourcesQuantities} />
+				<ResourceList
+					resources={planet.resourcesQuantities}
+					maxCapacity={planet.buildingsCapacities['Warehouse'].quantity}
+				/>
 				<BuildingList buildings={planet.buildingsLevels} planetId={planet.id} />
 			</div>
 		</div>
