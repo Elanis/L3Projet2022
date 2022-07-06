@@ -5,7 +5,7 @@ import './index.css';
 
 export default function PlanetView({ planet }) {
 	return (
-		<div>
+		<div className="planet-view">
 			<span>{planet.name}</span>
 			<div>
 				<ResourceList

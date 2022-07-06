@@ -6,3 +6,8 @@
 	display: inline-block;
 	vertical-align: top;
 }
+
+.planet-view {
+	display: inline-block;
+	min-width: 66vw;
+}

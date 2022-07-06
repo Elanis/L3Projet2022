@@ -8,6 +8,7 @@ export default function BuildingList({ buildings, enqueueSnackbar, planetId, req
 	for(const name in buildings) {
 		buildingsDOM.push(
 			<div className="planet-building-panel" key={name}>
+				<img className="building-img" alt={name} src={`img/icons/${name}.png`} />
 				<span className="building-name">{name}</span>
 				<span className="building-lvl">{buildings[name]}</span>
 				<input

@@ -8,8 +8,13 @@
 	display: inline-block;
 }
 
+.building-img {
+	max-height: 100px;
+	max-width: 100px;
+}
+
 .building-name {
-	width: 100%;
+	width: calc(100% - 100px);
 	text-align: center;
 }
 
