@@ -115,5 +115,13 @@ namespace L3Projet.Business.Implementations {
                 Username = user.Username
             };
         }
+
+        public object RenewToken(string? name) {
+            if (name == null) {
+                return null;
+            }
+
+            return GenerateJwtToken(name);
+        }
     }
 }

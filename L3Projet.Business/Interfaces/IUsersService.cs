@@ -5,5 +5,6 @@ namespace L3Projet.Business.Interfaces {
 		string? AuthenticateUser(string username, string password);
 		string? Register(UserRegistrationRequest request);
 		UserPublicDataResponse? GetByUsername(string? name);
-	}
+        object RenewToken(string? name);
+    }
 }
