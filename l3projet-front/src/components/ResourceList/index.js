@@ -5,7 +5,7 @@ export default function ResourceList({ resources }) {
 
 	for(const name in resources) {
 		resourcesDOM.push(
-			<div>
+			<div key={name}>
 				<span className="resources-name">{name}</span>
 				<span>{Math.round(resources[name])}</span>
 			</div>

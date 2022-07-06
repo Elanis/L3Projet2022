@@ -7,7 +7,7 @@ export default function BuildingList({ buildings, enqueueSnackbar, planetId, req
 	// TODO: upgrade costs
 	for(const name in buildings) {
 		buildingsDOM.push(
-			<div class="planet-building-panel">
+			<div className="planet-building-panel" key={name}>
 				<span className="building-name">{name}</span>
 				<span className="building-lvl">{buildings[name]}</span>
 				<input
