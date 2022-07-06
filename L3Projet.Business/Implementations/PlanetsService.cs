@@ -68,15 +68,19 @@ namespace L3Projet.Business.Implementations {
 
             UpdateResources(planet);
 
-            // Todo: check enough resources
             // Todo: time
-            // Todo: custom resources amount per building
 
             // Remove resources
-            var prevLevel = planet.Buildings.ElementAt((int)type).Level;
-            planet.Resources.ElementAt((int)ResourceType.Wood).Quantity -= prevLevel * 100;
-            planet.Resources.ElementAt((int)ResourceType.Metal).Quantity -= prevLevel * 100;
-            planet.Resources.ElementAt((int)ResourceType.Stone).Quantity -= prevLevel * 100;
+            var building = planet.Buildings.ElementAt((int)type);
+            var prevLevel = building.Level;
+            foreach (var resource in planet.Resources) {
+                if (resource.Quantity < prevLevel * building.Cost[resource.Type]) {
+                    throw new InvalidDataException("No enough resources");
+                }
+            }
+            foreach (var resource in planet.Resources) {
+                resource.Quantity -= prevLevel * building.Cost[resource.Type];
+            }
 
             planet.Buildings.ElementAt((int)type).Level += 1;
 
