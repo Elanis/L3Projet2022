@@ -1,22 +1,28 @@
-﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
+﻿using L3Projet.DataAccess;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 
 namespace L3Projet.WebAPI.HealthCheck {
-	public class DbHealthCheck : IHealthCheck {
-		public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default) {
-			var isHealthy = true; // TODO
+    public class DbHealthCheck : IHealthCheck {
+        private readonly GameContext gamecontext;
+        public DbHealthCheck(GameContext context) {
+            this.gamecontext = context;
+        }
 
-			if (isHealthy) {
-				return Task.FromResult(
-					HealthCheckResult.Healthy("A healthy result.")
-				);
-			}
+        public Task<HealthCheckResult> CheckHealthAsync(HealthCheckContext context, CancellationToken cancellationToken = default) {
+            try {
+                gamecontext.Users.Any();
 
-			return Task.FromResult(
-				new HealthCheckResult(
-					context.Registration.FailureStatus,
-					"An unhealthy result."
-				)
-			);
-		}
-	}
+                return Task.FromResult(
+                    HealthCheckResult.Healthy("OK")
+                );
+            } catch {
+                return Task.FromResult(
+                    new HealthCheckResult(
+                        context.Registration.FailureStatus,
+                        "Error"
+                    )
+                );
+            }
+        }
+    }
 }

@@ -3,7 +3,6 @@ import './index.css';
 export default function BuildingList({ buildings, enqueueSnackbar, planetId, requestPlanetListUpdate, token, upgradeBuilding,  }) {
 	const buildingsDOM = [];
 
-	// TODO: upgrade button onClick
 	// TODO: upgrade costs
 	for(const name in buildings) {
 		buildingsDOM.push(
