@@ -3,6 +3,7 @@ import { useSnackbar } from 'notistack';
 import usePlanetList from '../../contexts/planetList';
 import useRedirectIfNotAuthenticated from '../../hooks/useRedirectIfNotAuthenticated';
 
+import Leaderboard from '../Leaderboard';
 import PlanetView from '../PlanetView';
 
 export default function Game() {
@@ -18,6 +19,9 @@ export default function Game() {
 	}
 
 	return (
-		<PlanetView planet={planetList[0]} />
+		<>
+			<PlanetView planet={planetList[0]} />
+			<Leaderboard />
+		</>
 	);
 }

@@ -3,6 +3,7 @@ using L3Projet.Common;
 using L3Projet.Common.DTOModels;
 using L3Projet.Common.Models;
 using L3Projet.DataAccess;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -116,12 +117,16 @@ namespace L3Projet.Business.Implementations {
             };
         }
 
-        public object RenewToken(string? name) {
+        public string RenewToken(string? name) {
             if (name == null) {
                 return null;
             }
 
             return GenerateJwtToken(name);
+        }
+
+        public IEnumerable<LeaderboardUser> GetLeaderboard() {
+            return context.Users.Include(u => u.Planets).ThenInclude(p => p.Buildings).ToList().OrderByDescending(x => x.Points).Select(LeaderboardUser.MapUser);
         }
     }
 }

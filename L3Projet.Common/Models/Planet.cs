@@ -54,5 +54,8 @@ namespace L3Projet.Common.Models {
                 LastCalculation = DateTime.UtcNow
             };
         }
+
+        [NotMapped]
+        public int Points { get => Buildings.Sum(b => b.Level); }
     }
 }

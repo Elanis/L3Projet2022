@@ -60,5 +60,16 @@ namespace L3Projet.WebAPI.Controllers {
 
             return Ok(token);
         }
+
+        [HttpGet("leaderboard")]
+        public ActionResult<IEnumerable<LeaderboardUser>> GetLeaderboard() {
+            var leaderboard = usersService.GetLeaderboard();
+
+            if (leaderboard == null) {
+                return NoContent();
+            }
+
+            return Ok(leaderboard);
+        }
     }
 }
