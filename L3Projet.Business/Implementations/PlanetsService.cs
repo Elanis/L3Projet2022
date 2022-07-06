@@ -15,12 +15,20 @@ namespace L3Projet.Business.Implementations {
             var now = DateTime.UtcNow;
             var diff = now - p.LastCalculation;
 
-            // Todo: custom prod per type
-            // Todo: warehouse storage
+            var warehouseCapacity = p.Buildings.ElementAt((int)BuildingType.Warehouse).Production.Item2;
 
-            p.Resources.ElementAt((int)ResourceType.Wood).Quantity += p.Buildings.ElementAt((int)BuildingType.SawMill).Level * diff.TotalSeconds;
-            p.Resources.ElementAt((int)ResourceType.Metal).Quantity += p.Buildings.ElementAt((int)BuildingType.Metallurgy).Level * diff.TotalSeconds;
-            p.Resources.ElementAt((int)ResourceType.Stone).Quantity += p.Buildings.ElementAt((int)BuildingType.Quarry).Level * diff.TotalSeconds;
+            foreach (var building in p.Buildings) {
+                var prod = building.Production;
+                var resource = p.Resources.FirstOrDefault(r => r.Type == prod.Item1);
+                if (resource != null) {
+                    p.Resources.ElementAt((int)resource.Type).Quantity += prod.Item2 * diff.TotalSeconds;
+
+                    if (p.Resources.ElementAt((int)resource.Type).Quantity > warehouseCapacity) {
+                        p.Resources.ElementAt((int)resource.Type).Quantity = warehouseCapacity;
+                    }
+
+                }
+            }
 
             p.LastCalculation = now;
         }

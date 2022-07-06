@@ -2,6 +2,11 @@
 using System.Text.Json.Serialization;
 
 namespace L3Projet.Common.Models {
+    public record BuildingCapacity {
+        public string Resource { get; set; }
+        public double Quantity { get; set; }
+    }
+
     public class Planet {
         public Guid Id { get; init; }
         public string Name { get; set; }
@@ -11,6 +16,12 @@ namespace L3Projet.Common.Models {
         public Dictionary<BuildingType, int> BuildingsLevels {
             get {
                 return Buildings.ToDictionary(o => o.Type, o => o.Level);
+            }
+        }
+        [NotMapped]
+        public Dictionary<BuildingType, BuildingCapacity> BuildingsCapacities {
+            get {
+                return Buildings.ToDictionary(o => o.Type, o => new BuildingCapacity() { Resource = o.Production.Item1.ToString(), Quantity = o.Production.Item2 });
             }
         }
 
