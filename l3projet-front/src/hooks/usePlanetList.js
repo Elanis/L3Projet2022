@@ -23,5 +23,29 @@ export default function usePlanetList(shouldUpdate) {
 		getPlanetsList();
 	}, [token, shouldUpdate]);
 
+	useEffect(() => {
+		let timeout = setTimeout(() => {
+			for(const planet of planetsList) {
+	            const warehouseCapacity = planet.buildingsCapacities['Warehouse'].quantity;
+
+	            for(const building in planet.buildingsLevels) {
+	                var prod = planet.buildingsCapacities[building];
+	                var resource = planet.resourcesQuantities[prod.resource];
+	                if (resource) {
+	                	planet.resourcesQuantities[prod.resource] += prod.quantity;
+
+	                    if (planet.resourcesQuantities[prod.resource] > warehouseCapacity) {
+	                        planet.resourcesQuantities[prod.resource] = warehouseCapacity;
+	                    }
+
+	                }
+	            }
+	        }
+	        setPlanetsList(JSON.parse(JSON.stringify(planetsList))); // TODO: improve that please ...
+		}, 1000);
+
+		return () => clearTimeout(timeout);
+	}, [planetsList]);
+
 	return planetsList;
 }
