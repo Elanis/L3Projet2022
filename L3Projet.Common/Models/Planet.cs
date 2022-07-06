@@ -45,6 +45,8 @@ namespace L3Projet.Common.Models {
                     new Building { Type = BuildingType.Metallurgy, Level = 1 },
                     new Building { Type = BuildingType.Quarry, Level = 1 },
                     new Building { Type = BuildingType.Warehouse, Level = 1 },
+                    new Building { Type = BuildingType.House, Level = 1 },
+                    new Building { Type = BuildingType.HQ, Level = 1 },
                 },
                 Resources = new HashSet<Resource> {
                     new Resource{ Type = ResourceType.Wood, Quantity = 100 },

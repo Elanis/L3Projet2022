@@ -3,6 +3,7 @@
         Wood,
         Metal,
         Stone,
-        Storage
+        Storage,
+        None
     }
 }

@@ -10,7 +10,9 @@ namespace L3Projet.Common.Models {
             { BuildingType.Metallurgy, (ResourceType.Metal, 8.3) },
             { BuildingType.SawMill, (ResourceType.Wood, 7.8) },
             { BuildingType.Quarry, (ResourceType.Stone, 5.6) },
-            { BuildingType.Warehouse, (ResourceType.Storage, 9_876 ) }
+            { BuildingType.Warehouse, (ResourceType.Storage, 9_876 ) },
+            { BuildingType.House, (ResourceType.None, 0) },
+            { BuildingType.HQ, (ResourceType.None, 0) },
         };
 
         [NotMapped]

@@ -3,6 +3,8 @@
         SawMill,
         Metallurgy,
         Quarry,
-        Warehouse
+        Warehouse,
+        House,
+        HQ,
     }
 }

@@ -1,6 +1,4 @@
 export default function Leaderboard({ leaderboard, requireLeaderboardUpdate }) {
-	console.log({ leaderboard, requireLeaderboardUpdate });
-
 	return (
 		<div className="leaderboard planet-panel">
 			<h2>Leaderboard</h2>
