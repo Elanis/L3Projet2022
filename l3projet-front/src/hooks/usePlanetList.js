@@ -5,6 +5,8 @@ import { useSnackbar } from 'notistack';
 import useToken from '../contexts/token';
 import fetchWithAuth from '../helpers/fetchWithAuth';
 
+import { error } from '../helpers/audio';
+
 export default function usePlanetList(shouldUpdate) {
 	const { token } = useToken();
 	const [planetsList, setPlanetsList] = useState([]);
@@ -14,6 +16,7 @@ export default function usePlanetList(shouldUpdate) {
 		async function getPlanetsList() {
 			const res = await fetchWithAuth('/planets/mine', token);
 			if(res.status !== 200) {
+				error();
 				enqueueSnackbar('Error while fetching planets list.', { variant: 'error' });
 				return;
 			}

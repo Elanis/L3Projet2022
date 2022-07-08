@@ -1,7 +1,10 @@
 import { SERVER_URL } from '../config';
 
+import { error } from '../helpers/audio';
+
 export default async function login(user, password, setToken) {
 	if(user.trim() === '' || password.trim() === '') {
+		error();
 		return 'Error: Empty username and/or password';
 	}
 
@@ -14,7 +17,8 @@ export default async function login(user, password, setToken) {
 	const res = await fetch(`${SERVER_URL}/auth`, options);
 	if(res.status !== 200) {
 		if(res.status === 401) {
-			return 'Incorrect username and/or password'
+			error();
+			return 'Incorrect username and/or password';
 		}
 
 		return res.statusText;
