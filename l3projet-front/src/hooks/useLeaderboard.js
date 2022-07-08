@@ -13,7 +13,7 @@ export default function useLeaderboard(shouldUpdate) {
 	const { enqueueSnackbar } = useSnackbar(); 
 
 	useEffect(() => {
-		async function getPlanetsList() {
+		async function getLeaderboard() {
 			const res = await fetchWithAuth('/user/leaderboard', token);
 			if(res.status !== 200) {
 				error();
@@ -23,7 +23,7 @@ export default function useLeaderboard(shouldUpdate) {
 
 			setLeaderoard(await res.json());
 		}
-		getPlanetsList();
+		getLeaderboard();
 	}, [token, shouldUpdate]);
 
 	return leaderboard;
