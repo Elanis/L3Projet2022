@@ -49,7 +49,7 @@ namespace L3Projet.WebAPI {
             services.AddCors(options => {
                 options.AddPolicy(name: CORS_POLICY,
                                   policy => {
-                                      policy.WithOrigins("http://localhost:3000")
+                                      policy.AllowAnyOrigin()
                                             .AllowAnyMethod()
                                             .AllowAnyHeader();
                                   });
