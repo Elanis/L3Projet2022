@@ -5,4 +5,5 @@ function playSound(url, volume) {
 }
 
 export const error = () => playSound('/snd/error.ogg');
+export const music = () => playSound('/snd/music.mp3', 0.15);
 export const select = () => playSound('/snd/select_008.ogg');

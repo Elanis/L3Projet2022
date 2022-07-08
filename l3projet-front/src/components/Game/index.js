@@ -1,7 +1,11 @@
+import { useEffect } from 'react';
+
 import { useSnackbar } from 'notistack';
 
 import usePlanetList from '../../contexts/planetList';
 import useRedirectIfNotAuthenticated from '../../hooks/useRedirectIfNotAuthenticated';
+
+import { music } from '../../helpers/audio';
 
 import Leaderboard from '../Leaderboard';
 import PlanetView from '../PlanetView';
@@ -12,6 +16,10 @@ export default function Game() {
 	useRedirectIfNotAuthenticated();
 
 	const { planetList } = usePlanetList();
+
+	useEffect(() => {
+		music();
+	}, []);
 
 	// TODO: change planet
 
