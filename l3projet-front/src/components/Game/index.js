@@ -16,7 +16,6 @@ export default function Game() {
 	// TODO: change planet
 
 	if(planetList.length === 0) {
-		// TODO: Loading
 		return <img className="loading-gif" src="img/loading.png" alt="loading" />;
 	}
 
